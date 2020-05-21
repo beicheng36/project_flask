@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}更改记录{% endblock %}
+
+{% block page_content %}
+    <form method='POST'>
+        {{ form.sd.label }}{{ form.sd }}<br/>
+        {{ form.tr.label }}{{ form.tr }}<br/>
+        {{ form.dx.label }}{{ form.dx }}<br/>
+        {{ form.kt.label }}{{ form.kt }}<br/>
+        {{ form.yx.label }}{{ form.yx }}<br/>
+        {{ form.hj.label }}{{ form.hj }}<br/>
+        {{ form.submit}}
+    </form>
+{% endblock %}
