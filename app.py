@@ -24,7 +24,7 @@ class Dhfs(db.Model):
     hj = db.Column(db.Float())
 
     def __repr__(self):
-        return '{0},{1},{2},{3},{4},{5}'.format(self.crw[0], self.tr, self.dx, self.kt, self.yx, self.hj)
+        return '{0},{1},{2},{3},{4},{5}'.format(self.sd, self.tr, self.dx, self.kt, self.yx, self.hj)
 
 
 
