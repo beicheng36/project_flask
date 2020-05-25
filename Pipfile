@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 watchdog = "*"
+v = {editable = true,version = "*"}
 
 [packages]
 python-dotenv = "*"
