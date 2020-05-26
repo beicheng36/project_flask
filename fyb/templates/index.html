@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block page_content %}
+<h4> {{ rds|length }} Notes: </h4>
+    <table class="table table-bordered">
+    <tr>
+        <th>费用账期</th>
+        <th>天润</th>
+        <th>东信</th>
+        <th>科天</th>
+        <th>颐信</th>
+        <th>总计</th>
+        <th>操作</th>
+    </tr>
+        {% for rd in rds %}
+            <tr>
+                <td> {{rd.sd}} </td>
+                <td> {{rd.tr}} </td>
+                <td> {{rd.dx}} </td> 
+                <td> {{rd.kt}} </td>
+                <td> {{rd.yx}} </td>
+                <td> {{rd.hj}} </td> 
+                <td>
+                    <a href="{{ url_for('edit_rd',rd_sd=rd.sd) }}">编辑</a>
+		    <a href="{{ url_for('delete_rd',rd_sd=rd.sd) }}">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+<a href="{{ url_for('new_rd') }}">&larr; New</a>
+{% endblock %}
+
+
+
