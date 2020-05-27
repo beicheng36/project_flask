@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block page_content %}
+<h4> {{ rds|length }} Notes: </h4>
+    <table class="table table-bordered">
+    <tr>
+        <th>费用账期</th>
+        <th>费用金额</th>
+        <th>备注信息</th>
+    </tr>
+        {% for rd in rds %}
+            <tr>
+                <td> {{rd.sd}} </td>
+                <td> {{rd.fy}} </td>
+                <td> {{rd.bz}} </td> 
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+
+

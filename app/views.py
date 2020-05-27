@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from app.forms import *
-from app.controllers import DhfsDao
+from app.controllers import DhfsDao, DyfsDao
 
 
 # 定义蓝图
@@ -8,7 +8,7 @@ fydsbp = Blueprint('fydsbp', __name__, template_folder='templates')
 
 
 
-# 网页路由
+# 首页表单路由
 @fydsbp.route('/')
 def index():
 
@@ -58,6 +58,8 @@ def delete_rd(rd_sd):
     return redirect(url_for('fydsbp.index'))
 
 
-@fydsbp.route('/loading')
-def load1():
-    return '此页面,正在开发中.......'
+@fydsbp.route('/dyf')
+def dyfs():
+    rdservice = DyfsDao()
+    rds =rdservice.list_all()
+    return render_template('dyfs.html', rds=rds)
