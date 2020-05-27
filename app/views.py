@@ -1,13 +1,15 @@
-from flask import render_template, request, redirect, url_for
-from fyb.forms import NEDhfForm
-from fyb.controllers import DhfsDao
-from fyb import app
+from flask import Blueprint, render_template, request, redirect, url_for
+from app.forms import *
+from app.controllers import DhfsDao
 
+
+# 定义蓝图
+fydsbp = Blueprint('fydsbp', __name__, template_folder='templates')
 
 
 
 # 网页路由
-@app.route('/')
+@fydsbp.route('/')
 def index():
 
     rdservice = DhfsDao()
@@ -15,19 +17,19 @@ def index():
     return render_template('index.html', rds=rds)
 
 
-@app.route('/new', methods=['GET', 'POST'])
+@fydsbp.route('/new', methods=['GET', 'POST'])
 def new_rd():    
     form = NEDhfForm()
 
     if request.method == 'POST':
         dservice = DhfsDao()
         dservice.create_rd(request.form['sd'],request.form['tr'], request.form['dx'], request.form['kt'], request.form['yx'], request.form['hj'])
-        return redirect(url_for('index'))
+        return redirect(url_for('fydsbp.index'))
 
     return render_template('new_dhfrd.html', form=form, tls= "新增记录")
 
 
-@app.route('/edit/<int:rd_sd>', methods=['GET','POST'])
+@fydsbp.route('/edit/<int:rd_sd>', methods=['GET','POST'])
 def edit_rd(rd_sd):
     form = NEDhfForm()
     rd = DhfsDao().get_rd(rd_sd)
@@ -38,7 +40,7 @@ def edit_rd(rd_sd):
         rd.yx= request.form['yx']
         rd.hj= request.form['hj']
         DhfsDao().update_rd(rd)
-        return redirect(url_for('index'))        
+        return redirect(url_for('fydsbp.index'))        
     form.sd.data = rd.sd
     form.tr.data = rd.tr
     form.dx.data = rd.dx
@@ -48,14 +50,14 @@ def edit_rd(rd_sd):
     return render_template('new_dhfrd.html', form=form, tls = "修改记录")
 
 
-@app.route('/delete/<int:rd_sd>', methods=['GET'])
+@fydsbp.route('/delete/<int:rd_sd>', methods=['GET'])
 def delete_rd(rd_sd):
     rdsdao = DhfsDao()
     rd = rdsdao.get_rd(rd_sd)
     rdsdao.delete_rd(rd)
-    return redirect(url_for('index'))
+    return redirect(url_for('fydsbp.index'))
 
 
-@app.route('/loading')
+@fydsbp.route('/loading')
 def load1():
     return '此页面,正在开发中.......'

@@ -1,5 +1,5 @@
-from fyb.models import Dhfs
-from fyb import db, app
+from app.models import Dhfs,db
+
 
 
 
