@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for,flash
 from app.forms import *
 from app.controllers import DhfsDao, DyfsDao
 
@@ -55,6 +55,7 @@ def delete_rd(rd_sd):
     rdsdao = DhfsDao()
     rd = rdsdao.get_rd(rd_sd)
     rdsdao.delete_rd(rd)
+    flash('Success deletc')
     return redirect(url_for('fydsbp.index'))
 
 
