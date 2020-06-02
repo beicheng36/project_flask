@@ -29,7 +29,21 @@
             </tr>
         {% endfor %}
     </table>
-<a href="{{ url_for('fydsbp.new_rd') }}">&larr; New</a>
+    <br>
+    <br>
+    <br>
+    <br>
+<h4>{{ tls }}</h4>
+<form method="POST">
+    {{ form.sd.label }}{{ form.sd }}<br/>
+    {{ form.tr.label }}{{ form.tr }}<br/>
+    {{ form.dx.label }}{{ form.dx }}<br/>
+    {{ form.kt.label }}{{ form.kt }}<br/>
+    {{ form.yx.label }}{{ form.yx }}<br/>
+    {{ form.hj.label }}{{ form.hj }}<br/>
+    {{ form.submit}}
+</form>
+
 {% endblock %}
 
 

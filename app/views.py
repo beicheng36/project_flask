@@ -12,36 +12,31 @@ fydsbp = Blueprint('fydsbp', __name__, template_folder='templates')
 # 电话费表单路由
 @fydsbp.route('/')
 def index():
-
+    form = NEDhfForm()
     rdservice = DhfsDao()
     rds = rdservice.list_all(Dhfs)
-    return render_template('index.html', rds=rds)
-
-
-@fydsbp.route('/new', methods=['GET', 'POST'])
-def new_rd():    
-    form = NEDhfForm()
-
+    tls= "提交记录"
     if request.method == 'POST':
-        dservice = DhfsDao()
+        form.hj.data = sum(form.tr.data, form.dx.data, form.kt.data, form.yx.data)
         new_rd = Dhfs(
             sd = request.form['sd'],
             tr = request.form['tr'],
             dx = request.form['dx'],
             kt = request.form['kt'],
             yx = request.form['yx'],
-            hj = request.form['hj']
+            hj = request.form['yx']
         )
-        dservice.create_rd(new_rd)
+        DhfsDao().create_rd(new_rd)
         return redirect(url_for('fydsbp.index'))
-
-    return render_template('new_dhfrd.html', form=form, tls= "新增记录")
+    return render_template('index.html', rds=rds, form=form, tls=tls)
 
 
 @fydsbp.route('/edit/<int:rd_sd>', methods=['GET','POST'])
 def edit_rd(rd_sd):
     form = NEDhfForm()
     rd = DhfsDao().get_rd(Dhfs, rd_sd)
+    rds = DhfsDao().list_all(Dhfs)
+    tls = '修改记录'
     if request.method == 'POST':
         rd.tr = request.form['tr']
         rd.dx = request.form['dx']
@@ -56,7 +51,7 @@ def edit_rd(rd_sd):
     form.kt.data = rd.kt
     form.yx.data = rd.yx
     form.hj.data = rd.hj
-    return render_template('new_dhfrd.html', form=form, tls = "修改记录")
+    return render_template('index.html', rds=rds, form=form, tls = tls)
 
 
 @fydsbp.route('/delete/<int:rd_sd>', methods=['GET'])
