@@ -17,8 +17,8 @@
                 <td> {{ rd.fy }} </td>
                 <td> {{ rd.bz }} </td>
                 <td> 
-                    <a href="{{ url_for('fydsbp.ed_rd',rd_sd=rd.sd) }}">编辑</a>
-                    <a href="{{ url_for('fydsbp.del_rd',rd_sd=rd.sd) }}">删除</a>
+                    <a href="{{ url_for('fydsbp.ed_kdrd',rd_sd=rd.sd) }}">编辑</a>
+                    <a href="{{ url_for('fydsbp.del_kdrd',rd_sd=rd.sd) }}">删除</a>
                 </td>
             </tr>
         {% endfor %}
