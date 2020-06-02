@@ -10,14 +10,13 @@ fydsbp = Blueprint('fydsbp', __name__, template_folder='templates')
 
 
 # 电话费表单路由
-@fydsbp.route('/')
+@fydsbp.route('/', methods=['GET', 'POST'])
 def index():
     form = NEDhfForm()
     rdservice = DhfsDao()
     rds = rdservice.list_all(Dhfs)
     tls= "提交记录"
     if request.method == 'POST':
-        form.hj.data = sum(form.tr.data, form.dx.data, form.kt.data, form.yx.data)
         new_rd = Dhfs(
             sd = request.form['sd'],
             tr = request.form['tr'],
